@@ -1,8 +1,27 @@
+import {
+    fetchApi,
+} from "./api.js";
+
+async function renderStartPage() {
+    const topMovies = await fetchApi(`https://santosnr6.github.io/Data/movies.json`);
+
+    const topMoviesRef = document.createElement(`section`);
+    topMoviesRef.classList.add(`top-movies`)
+    document.querySelector(`main`).appendChild(topMoviesRef)
+
+    topMovies.forEach(movie => {
+        renderTopMovieCard(movie);
+    });
+    document.querySelectorAll(`.movies__card`).forEach(card => {
+        card.addEventListener(`click`, movieCardEvent)
+    })
+}
+
 function renderTopMovieCard(movie) {
     const artRef = document.createElement(`article`);
     artRef.classList.add(`movies__card`);
     artRef.dataset.id = movie.imdbid;
-    document.querySelector(`main`).appendChild(artRef);
+    document.querySelector(`.top-movies`).appendChild(artRef);
 
     let imgRef = document.createElement(`img`);
     imgRef.src = movie.poster;
@@ -23,3 +42,9 @@ function renderTopMovieCard(movie) {
     h3Ref.textContent = movie.title;
     artRef.appendChild(h3Ref)
 }
+
+function movieCardEvent() {
+    console.log(`movieCardEvent`);
+}
+
+renderStartPage()
