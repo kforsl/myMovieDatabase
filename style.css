@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1c2020;
+}
+
+.wrapper {
+    max-width: 1440px;
+    min-width: 400px;
+    margin: 0 auto;
+}
+
+/* header Styling */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #101313;
+    width: 100vw;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.header__container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    text-decoration: none;
+    color: white;
+}
+
+.header__form-container {
+    display: flex;
+    max-height: 35px;
+}
+
+.header__search-bar {
+    padding: .5rem .8rem;
+    font-size: 1rem;
+    border-radius: 1rem 0 0 1rem;
+    border: none;
+    min-width: 400px;
+    background-color: white;
+}
+
+.header__search-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 .5rem;
+    border-radius: 0 1rem 1rem 0;
+    text-decoration: none;
+    border: none;
+    color: black;
+    background-color: white;
+    border-left: 1px solid rgba(0, 0, 0, .2);
+    cursor: pointer;
+}
+
+.header__search-btn:hover {
+    background-color: gray;
+}
+
+.header__favorit-menu {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+/* Top Movies Styling */
+.top-movies {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.top-movies__section-title {
+    font-size: 1.5rem;
+    text-align: center;
+    color: #fff;
+}
+
+.top-movies__card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; */
+
+    gap: 2rem;
+}
+
+/* Top Movies Card Styling */
+
+.movies__card {
+    margin: auto;
+    position: relative;
+    max-width: 300px;
+    border-radius: .5rem;
+    padding: 1rem;
+    aspect-ratio: 2/3;
+    background-color: #282e2e;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.movies__poster-container {
+    width: 100%;
+    pointer-events: none;
+}
+
+.movies__card-poster {
+    width: 100%;
+    border-radius: .5rem;
+    pointer-events: none;
+    filter: brightness(80%);
+}
+
+.movies__favorit-star {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .75);
+    padding: .6rem;
+    padding-top: .8rem;
+    border-radius: 0 0 0 1rem;
+}
+
+.movies__card-title {
+    font-size: 1rem;
+    height: 44px;
+    pointer-events: none;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* Footer Section Styling */
+
+.footer {
+    background-color: #101313;
+    width: 100vw;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+}
+
+.footer__text-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__title {
+    color: #fff;
+}
+
+.footer__clear-btn {
+    color: #fff;
+    background: none;
+    border: none;
+    font-size: 14px;
+}
+
+.footer__recent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
