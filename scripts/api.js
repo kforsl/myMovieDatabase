@@ -9,4 +9,7 @@ async function fetchApi(apiUrl) {
     return await results.json()
 }
 
-export { fetchApi }
+export {
+    fetchApi,
+    fetchMore,
+}
