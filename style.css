@@ -150,3 +150,37 @@ body {
     overflow: hidden;
     color: #fff;
 }
+
+/* Footer Section Styling */
+
+.footer {
+    background-color: #101313;
+    width: 100vw;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+}
+
+.footer__text-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__title {
+    color: #fff;
+}
+
+.footer__clear-btn {
+    color: #fff;
+    background: none;
+    border: none;
+    font-size: 14px;
+}
+
+.footer__recent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
