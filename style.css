@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Top Movies Card Styling */
+
+.movies__card {
+    margin: auto;
+    position: relative;
+    max-width: 300px;
+    border-radius: .5rem;
+    padding: 1rem;
+    aspect-ratio: 2/3;
+    background-color: #282e2e;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.movies__poster-container {
+    width: 100%;
+    pointer-events: none;
+}
+
+.movies__card-poster {
+    width: 100%;
+    border-radius: .5rem;
+    pointer-events: none;
+    filter: brightness(80%);
+}
+
+.movies__favorit-star {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .75);
+    padding: .6rem;
+    padding-top: .8rem;
+    border-radius: 0 0 0 1rem;
+}
+
+.movies__card-title {
+    font-size: 1rem;
+    height: 44px;
+    pointer-events: none;
+    overflow: hidden;
+    color: #fff;
+}
