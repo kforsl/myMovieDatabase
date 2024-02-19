@@ -2,11 +2,16 @@ import {
     fetchApi,
 } from "./api.js";
 
+import {
+    movieCardEvent,
+} from "./app.js";
+
 async function renderStartPage() {
     const topMovies = await fetchApi(`https://santosnr6.github.io/Data/movies.json`);
 
     const topMoviesRef = document.createElement(`section`);
     topMoviesRef.classList.add(`top-movies`);
+
     document.querySelector(`.wrapper`).appendChild(topMoviesRef);
 
     const h2Ref = document.createElement(`h2`);
@@ -21,6 +26,7 @@ async function renderStartPage() {
     topMovies.forEach(movie => {
         renderTopMovieCard(movie);
     });
+  
     document.querySelectorAll(`.movies__card`).forEach(card => {
         card.addEventListener(`click`, movieCardEvent);
     })
@@ -52,8 +58,17 @@ function renderTopMovieCard(movie) {
     artRef.appendChild(h3Ref)
 }
 
-function movieCardEvent() {
-    console.log(`movieCardEvent`);
+function toggleFavorit(star) {
+    if (star.dataset.favorit === `false`) {
+        star.dataset.favorit = true;
+        star.src = `./icons/favorite-fill.svg`
+    } else if (star.dataset.favorit === `true`) {
+        star.dataset.favorit = false;
+        star.src = `./icons/favorite-outline.svg`
+    }
 }
 
-renderStartPage()
+export {
+    renderStartPage,
+    toggleFavorit,
+}
