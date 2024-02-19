@@ -14,6 +14,70 @@ body {
     margin: 0 auto;
 }
 
+/* header Styling */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #101313;
+    width: 100vw;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.header__container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    text-decoration: none;
+    color: white;
+}
+
+.header__form-container {
+    display: flex;
+    max-height: 35px;
+}
+
+.header__search-bar {
+    padding: .5rem .8rem;
+    font-size: 1rem;
+    border-radius: 1rem 0 0 1rem;
+    border: none;
+    min-width: 400px;
+    background-color: white;
+}
+
+.header__search-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 .5rem;
+    border-radius: 0 1rem 1rem 0;
+    text-decoration: none;
+    border: none;
+    color: black;
+    background-color: white;
+    border-left: 1px solid rgba(0, 0, 0, .2);
+    cursor: pointer;
+}
+
+.header__search-btn:hover {
+    background-color: gray;
+}
+
+.header__favorit-menu {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+/* Top Movies Styling */
 .top-movies {
     display: flex;
     flex-direction: column;

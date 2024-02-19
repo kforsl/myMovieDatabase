@@ -12,7 +12,7 @@ async function renderStartPage() {
     const topMoviesRef = document.createElement(`section`);
     topMoviesRef.classList.add(`top-movies`);
 
-    document.querySelector(`.wrapper`).appendChild(topMoviesRef);
+    document.querySelector(`main .wrapper`).appendChild(topMoviesRef);
 
     const h2Ref = document.createElement(`h2`);
     h2Ref.textContent = `My Movie Database Top 20`;
@@ -26,7 +26,7 @@ async function renderStartPage() {
     topMovies.forEach(movie => {
         renderTopMovieCard(movie);
     });
-  
+
     document.querySelectorAll(`.movies__card`).forEach(card => {
         card.addEventListener(`click`, movieCardEvent);
     })
