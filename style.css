@@ -14,6 +14,70 @@ body {
     margin: 0 auto;
 }
 
+/* header Styling */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #101313;
+    width: 100vw;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.header__container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    text-decoration: none;
+    color: white;
+}
+
+.header__form-container {
+    display: flex;
+    max-height: 35px;
+}
+
+.header__search-bar {
+    padding: .5rem .8rem;
+    font-size: 1rem;
+    border-radius: 1rem 0 0 1rem;
+    border: none;
+    min-width: 400px;
+    background-color: white;
+}
+
+.header__search-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 .5rem;
+    border-radius: 0 1rem 1rem 0;
+    text-decoration: none;
+    border: none;
+    color: black;
+    background-color: white;
+    border-left: 1px solid rgba(0, 0, 0, .2);
+    cursor: pointer;
+}
+
+.header__search-btn:hover {
+    background-color: gray;
+}
+
+.header__favorit-menu {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+/* Top Movies Styling */
 .top-movies {
     display: flex;
     flex-direction: column;
@@ -85,4 +149,124 @@ body {
     pointer-events: none;
     overflow: hidden;
     color: #fff;
+}
+
+/* Movie More Information Card Styling */
+
+.movie-information {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-information__card {
+    margin: 2rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    background-color: #282e2e;
+    display: flex;
+    flex-direction: row;
+    max-width: 1000px;
+}
+
+.movie-information__image-container {
+    display: flex;
+    align-items: center;
+}
+
+.movie-information__text-container {
+    padding: 1rem;
+}
+
+.movie-information__top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(240, 240, 240, .5);
+}
+
+.movie-information__movie-title {
+    font-size: 1.5rem;
+    margin-bottom: .5rem;
+    color: white;
+}
+
+.movie-information__middle-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.movie-information__movie-tags {
+    color: white;
+    font-size: .9rem;
+}
+
+.movie-informtain__bottom-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.movie-informtain__bottom-left {
+    max-width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: .5rem;
+    gap: .7rem;
+}
+
+.movie-informtain__sub-title {
+    font-size: 1.1rem;
+    color: white;
+    margin-bottom: .4rem;
+}
+
+.movie-informtain__description {
+    font-size: 1rem;
+    color: white;
+}
+
+.movie-informtain__bottom-right {
+    max-width: 60%;
+    padding: 0 1rem;
+    border-left: 1px solid rgba(240, 240, 240, .5);
+}
+
+/* Footer Section Styling */
+
+.footer {
+    background-color: #101313;
+    width: 100vw;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+}
+
+.footer__text-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__title {
+    color: #fff;
+}
+
+.footer__clear-btn {
+    color: #fff;
+    background: none;
+    border: none;
+    font-size: 14px;
+}
+
+.footer__recent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
 }
