@@ -3,6 +3,7 @@ import {
     toggleFavorit,
     renderInformationCard,
     checkStars,
+    renderFavoritPage,
 } from "./dom.js";
 
 import {
@@ -15,13 +16,14 @@ window.addEventListener(`load`, async () => {
         const movieInformationObject = JSON.parse(movieInformationString)
         renderInformationCard(movieInformationObject)
         checkStars()
+    } else if (window.location.href.includes(`favorit`)) {
+        renderFavoritPage()
+        checkStars()
     } else {
         renderStartPage()
 
     }
 })
-
-
 
 async function movieCardEvent(event) {
     if (event.target.src === undefined) {
@@ -31,6 +33,8 @@ async function movieCardEvent(event) {
     } else if (event.target.src.includes(`favorite`)) {
         toggleFavorit(event.target)
     }
+
+    renderFavoritPage()
 }
 
 export {

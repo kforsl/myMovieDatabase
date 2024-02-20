@@ -1,5 +1,6 @@
 import {
     fetchApi,
+    fetchMore,
 } from "./api.js";
 
 import {
@@ -39,6 +40,31 @@ async function renderStartPage() {
     checkStars()
 }
 
+async function renderFavoritPage() {
+    const favorits = getLocalStorage(`favorits`);
+
+    if (window.location.href.includes(`favorit`)) {
+        if (document.querySelector(`.movies__card-container`) === null) {
+            console.log(`test`);
+            const containerRef = document.createElement(`section`);
+            containerRef.classList.add(`movies__card-container`);
+            document.querySelector(`main .wrapper`).appendChild(containerRef);
+        }
+
+        document.querySelector(`.movies__card-container`).textContent = ``;
+
+        for (let i = 0; i < favorits.length; i++) {
+            const movie = await fetchMore(favorits[i])
+            renderMovieCard(movie)
+        }
+
+        document.querySelectorAll(`.movies__card`).forEach(card => {
+            card.addEventListener(`click`, movieCardEvent);
+        })
+    }
+
+}
+
 function renderTopMovieCard(movie) {
     const artRef = document.createElement(`article`);
     artRef.classList.add(`movies__card`);
@@ -62,6 +88,32 @@ function renderTopMovieCard(movie) {
     const h3Ref = document.createElement(`h3`);
     h3Ref.classList.add(`movies__card-title`);
     h3Ref.textContent = movie.title;
+    artRef.appendChild(h3Ref)
+}
+
+function renderMovieCard(movie) {
+    const artRef = document.createElement(`article`);
+    artRef.classList.add(`movies__card`);
+    artRef.dataset.id = movie.imdbID;
+    document.querySelector(`.movies__card-container`).appendChild(artRef);
+
+    let imgRef = document.createElement(`img`);
+    imgRef.src = movie.Poster;
+    imgRef.alt = `${movie.Title} poster`;
+    imgRef.classList.add(`movies__card-poster`);
+    artRef.appendChild(imgRef);
+
+    imgRef = document.createElement(`img`);
+    imgRef.dataset.id = movie.imdbID;
+    imgRef.dataset.favorit = true;
+    imgRef.src = `./icons/favorite-fill.svg`;
+    imgRef.alt = `Favorit Star`;
+    imgRef.classList.add(`movies__favorit-star`);
+    artRef.appendChild(imgRef);
+
+    const h3Ref = document.createElement(`h3`);
+    h3Ref.classList.add(`movies__card-title`);
+    h3Ref.textContent = movie.Title;
     artRef.appendChild(h3Ref)
 }
 
@@ -245,4 +297,5 @@ export {
     toggleFavorit,
     renderInformationCard,
     checkStars,
+    renderFavoritPage,
 }
