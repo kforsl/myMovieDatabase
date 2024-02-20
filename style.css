@@ -91,6 +91,7 @@ body {
     color: #fff;
 }
 
+.movies__card-container,
 .top-movies__card-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
