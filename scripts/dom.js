@@ -35,6 +35,8 @@ async function renderStartPage() {
     document.querySelectorAll(`.movies__card`).forEach(card => {
         card.addEventListener(`click`, movieCardEvent);
     })
+
+    checkStars()
 }
 
 function renderTopMovieCard(movie) {
@@ -219,8 +221,28 @@ async function renderInformationCard(movieInformation) {
     sectionRef.appendChild(pRef);
 }
 
+function checkStars() {
+    try {
+        const favorits = getLocalStorage(`favorits`)
+        const imgRef = document.querySelectorAll(`img`)
+        imgRef.forEach(node => {
+            if (node.alt === `Favorit Star`) {
+                if (favorits.includes(node.getAttribute(`data-id`))) {
+                    console.log(`Is in storage`);
+                    node.src = `./icons/favorite-fill.svg`;
+                    node.dataset.favorit = true;
+                }
+            }
+
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export {
     renderStartPage,
     toggleFavorit,
     renderInformationCard,
+    checkStars,
 }

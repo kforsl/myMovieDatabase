@@ -2,6 +2,7 @@ import {
     renderStartPage,
     toggleFavorit,
     renderInformationCard,
+    checkStars,
 } from "./dom.js";
 
 import {
@@ -13,8 +14,10 @@ window.addEventListener(`load`, async () => {
         const movieInformationString = localStorage.getItem(`clickedMovie`)
         const movieInformationObject = JSON.parse(movieInformationString)
         renderInformationCard(movieInformationObject)
+        checkStars()
     } else {
         renderStartPage()
+
     }
 })
 
