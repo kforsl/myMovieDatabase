@@ -64,11 +64,8 @@ function renderTopMovieCard(movie) {
 }
 
 function toggleFavorit(star) {
-
     const Response = getLocalStorage(`favorits`)
     let favoritsArray = []
-    console.log(typeof (Response));
-    console.log(Response);
 
     if (Response === null || Response.length === 0) {
         favoritsArray.push(star.dataset.id)
@@ -80,18 +77,16 @@ function toggleFavorit(star) {
     }
 
     if (star.dataset.favorit === `false`) {
-        addLocalStorage(`favorits`, JSON.stringify(favoritsArray))
         star.dataset.favorit = true;
         star.src = `./icons/favorite-fill.svg`
 
     } else if (star.dataset.favorit === `true`) {
         favoritsArray = favoritsArray.filter(id => id !== star.dataset.id)
-        addLocalStorage(`favorits`, JSON.stringify(favoritsArray))
         star.dataset.favorit = false;
         star.src = `./icons/favorite-outline.svg`
     }
-    const Test = getLocalStorage(`favorits`)
-    console.log(Test);
+
+    addLocalStorage(`favorits`, JSON.stringify(favoritsArray))
 }
 
 async function renderInformationCard(movieInformation) {
