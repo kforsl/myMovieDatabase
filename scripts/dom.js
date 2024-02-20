@@ -107,6 +107,9 @@ async function renderInformationCard(movieInformation) {
     imgRef = document.createElement(`img`);
     imgRef.src = `./icons/favorite-outline.svg`;
     imgRef.alt = `Favorit Star`;
+    imgRef.dataset.favorit = false;
+    imgRef.dataset.id = movieInformation.imdbID;
+    imgRef.addEventListener(`click`, movieCardEvent)
     divRef.appendChild(imgRef);
 
     /* Middle Section Elements  */
@@ -152,6 +155,9 @@ async function renderInformationCard(movieInformation) {
     pRef.textContent = movieInformation.Director;
     divRef.appendChild(pRef);
 
+    divRef = document.createElement(`div`);
+    sectionRef.appendChild(divRef);
+
     h3Ref = document.createElement(`h3`);
     h3Ref.classList.add(`movie-informtain__sub-title`);
     h3Ref.textContent = `Writer: `
@@ -161,6 +167,9 @@ async function renderInformationCard(movieInformation) {
     pRef.classList.add(`movie-informtain__description`);
     pRef.textContent = movieInformation.Writer;
     divRef.appendChild(pRef);
+
+    divRef = document.createElement(`div`);
+    sectionRef.appendChild(divRef);
 
     h3Ref = document.createElement(`h3`);
     h3Ref.classList.add(`movie-informtain__sub-title`);

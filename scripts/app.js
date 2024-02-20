@@ -21,15 +21,13 @@ window.addEventListener(`load`, async () => {
 
 
 async function movieCardEvent(event) {
-
-    if (event.target.getAttribute(`class`) === `movies__favorit-star`) {
-        toggleFavorit(event.target)
-    } else {
+    if (event.target.src === undefined) {
         const movieInformation = await fetchMore(event.target.dataset.id)
         localStorage.setItem(`clickedMovie`, JSON.stringify(movieInformation))
         window.location = `./movie.html`
+    } else if (event.target.src.includes(`favorite`)) {
+        toggleFavorit(event.target)
     }
-
 }
 
 export {
