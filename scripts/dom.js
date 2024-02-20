@@ -66,7 +66,7 @@ function renderTopMovieCard(movie) {
 function toggleFavorit(star) {
 
     const Response = getLocalStorage(`favorits`)
-    const favoritsArray = []
+    let favoritsArray = []
     console.log(typeof (Response));
     console.log(Response);
 
@@ -85,10 +85,13 @@ function toggleFavorit(star) {
         star.src = `./icons/favorite-fill.svg`
 
     } else if (star.dataset.favorit === `true`) {
-
+        favoritsArray = favoritsArray.filter(id => id !== star.dataset.id)
+        addLocalStorage(`favorits`, JSON.stringify(favoritsArray))
         star.dataset.favorit = false;
         star.src = `./icons/favorite-outline.svg`
     }
+    const Test = getLocalStorage(`favorits`)
+    console.log(Test);
 }
 
 async function renderInformationCard(movieInformation) {
