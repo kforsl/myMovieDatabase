@@ -45,10 +45,20 @@ async function renderFavoritPage() {
 
     if (window.location.href.includes(`favorit`)) {
         if (document.querySelector(`.movies__card-container`) === null) {
-            console.log(`test`);
+
+            const topMoviesRef = document.createElement(`section`);
+            topMoviesRef.classList.add(`movies`);
+
+            document.querySelector(`main .wrapper`).appendChild(topMoviesRef);
+
+            const h2Ref = document.createElement(`h2`);
+            h2Ref.textContent = `My Favorit Movies`;
+            h2Ref.classList.add(`movies__section-title`);
+            topMoviesRef.appendChild(h2Ref);
+
             const containerRef = document.createElement(`section`);
             containerRef.classList.add(`movies__card-container`);
-            document.querySelector(`main .wrapper`).appendChild(containerRef);
+            document.querySelector(`main .movies`).appendChild(containerRef);
         }
 
         document.querySelector(`.movies__card-container`).textContent = ``;

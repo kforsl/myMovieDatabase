@@ -78,6 +78,7 @@ body {
 }
 
 /* Top Movies Styling */
+.movies,
 .top-movies {
     display: flex;
     flex-direction: column;
@@ -85,6 +86,7 @@ body {
     margin-bottom: 3rem;
 }
 
+.movies__section-title,
 .top-movies__section-title {
     font-size: 1.5rem;
     text-align: center;
