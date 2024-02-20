@@ -9,12 +9,12 @@ import {
 } from "./api.js";
 
 window.addEventListener(`load`, async () => {
-    if (window.location.href.includes(`index`)) {
-        renderStartPage()
-    } else if (window.location.href.includes(`movie`)) {
+    if (window.location.href.includes(`movie`)) {
         const movieInformationString = localStorage.getItem(`clickedMovie`)
         const movieInformationObject = JSON.parse(movieInformationString)
         renderInformationCard(movieInformationObject)
+    } else {
+        renderStartPage()
     }
 })
 

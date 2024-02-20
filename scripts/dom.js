@@ -6,6 +6,11 @@ import {
     movieCardEvent,
 } from "./app.js";
 
+import {
+    getLocalStorage,
+    addLocalStorage
+} from "./localStorage.js";
+
 async function renderStartPage() {
     const topMovies = await fetchApi(`https://santosnr6.github.io/Data/movies.json`);
 
@@ -59,10 +64,28 @@ function renderTopMovieCard(movie) {
 }
 
 function toggleFavorit(star) {
+
+    const Response = getLocalStorage(`favorits`)
+    const favoritsArray = []
+    console.log(typeof (Response));
+    console.log(Response);
+
+    if (Response === null || Response.length === 0) {
+        favoritsArray.push(star.dataset.id)
+    } else {
+        Response.forEach(id => {
+            favoritsArray.push(id)
+        });
+        favoritsArray.push(star.dataset.id)
+    }
+
     if (star.dataset.favorit === `false`) {
+        addLocalStorage(`favorits`, JSON.stringify(favoritsArray))
         star.dataset.favorit = true;
         star.src = `./icons/favorite-fill.svg`
+
     } else if (star.dataset.favorit === `true`) {
+
         star.dataset.favorit = false;
         star.src = `./icons/favorite-outline.svg`
     }
