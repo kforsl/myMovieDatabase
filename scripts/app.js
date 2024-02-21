@@ -5,6 +5,8 @@ import {
     checkStars,
     renderFavoritPage,
     renderSearchPage,
+    addRecentlyViewed,
+    renderRecentlyViewed,
 } from "./dom.js";
 
 import {
@@ -17,6 +19,7 @@ window.addEventListener(`load`, async () => {
         const movieInformationObject = JSON.parse(movieInformationString)
         renderInformationCard(movieInformationObject)
         checkStars()
+
     } else if (window.location.href.includes(`favorit`)) {
         renderFavoritPage()
 
@@ -26,6 +29,7 @@ window.addEventListener(`load`, async () => {
     } else {
         renderStartPage()
     }
+    renderRecentlyViewed()
     document.querySelector(`.header__search-btn`).addEventListener(`click`, searchMovieEvent)
 
 })
@@ -34,6 +38,7 @@ async function movieCardEvent(event) {
     if (event.target.src === undefined) {
         const movieInformation = await fetchMore(event.target.dataset.id)
         localStorage.setItem(`clickedMovie`, JSON.stringify(movieInformation))
+        addRecentlyViewed(event.target.dataset.id)
         window.location = `./movie.html`
     } else if (event.target.src.includes(`favorite`)) {
         toggleFavorit(event.target)
