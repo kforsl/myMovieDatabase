@@ -15,6 +15,22 @@ import {
 async function renderStartPage() {
     const topMovies = await fetchApi(`https://santosnr6.github.io/Data/movies.json`);
 
+    const usedNmbrs = [];
+
+    const trailers = document.createElement(`section`);
+    trailers.classList.add(`trailers`);
+    document.querySelector(`main .wrapper`).appendChild(trailers);
+
+    while (usedNmbrs.length < 5) {
+        const randomNmbr = Math.floor(Math.random() * topMovies.length)
+        if (!usedNmbrs.includes(randomNmbr)) {
+            usedNmbrs.push(randomNmbr);
+        }
+    }
+    usedNmbrs.forEach(nmbr => {
+        renderTrailers(topMovies[nmbr])
+    });
+
     const topMoviesRef = document.createElement(`section`);
     topMoviesRef.classList.add(`top-movies`);
 
@@ -151,6 +167,13 @@ function toggleFavorit(star) {
     }
 
     addLocalStorage(`favorits`, JSON.stringify(favoritsArray))
+}
+
+function renderTrailers(movie) {
+    const iFrameRef = document.createElement(`iframe`);
+    iFrameRef.classList.add(`trailers__video`)
+    iFrameRef.src = movie.trailer_link
+    document.querySelector(`.trailers`).appendChild(iFrameRef)
 }
 
 async function renderInformationCard(movieInformation) {
@@ -290,7 +313,7 @@ function checkStars() {
         imgRef.forEach(node => {
             if (node.alt === `Favorit Star`) {
                 if (favorits.includes(node.getAttribute(`data-id`))) {
-                    console.log(`Is in storage`);
+
                     node.src = `./icons/favorite-fill.svg`;
                     node.dataset.favorit = true;
                 }
