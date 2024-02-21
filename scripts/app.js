@@ -13,6 +13,10 @@ import {
     fetchMore,
 } from "./api.js";
 
+import {
+    removeItemLocalStorage
+} from "./localStorage.js"
+
 window.addEventListener(`load`, async () => {
     if (window.location.href.includes(`movie`)) {
         const movieInformationString = localStorage.getItem(`clickedMovie`)
@@ -31,6 +35,10 @@ window.addEventListener(`load`, async () => {
     }
     renderRecentlyViewed()
     document.querySelector(`.header__search-btn`).addEventListener(`click`, searchMovieEvent)
+    document.querySelector(`.footer__clear-btn`).addEventListener(`click`, () => {
+        removeItemLocalStorage(`recently`)
+        document.querySelector(`.footer__recent-grid`).innerHTML = ``
+    })
 
 })
 

@@ -381,7 +381,7 @@ function addRecentlyViewed(id) {
         recentlyArray.unshift(id)
     } else {
         response.forEach(id => {
-            if (recentlyArray.length < 4) {
+            if (recentlyArray.length < 6) {
                 recentlyArray.push(id)
             }
         });

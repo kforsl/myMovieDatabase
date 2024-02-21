@@ -7,8 +7,8 @@ function addLocalStorage(key, value) {
     localStorage.setItem(key, value)
 }
 
-function clearLocalStorage(key) {
-    localStorage.clear(key)
+function removeItemLocalStorage(key) {
+    localStorage.removeItem(key)
 }
 
-export { getLocalStorage, addLocalStorage, clearLocalStorage }
+export { getLocalStorage, addLocalStorage, removeItemLocalStorage }
