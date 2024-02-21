@@ -40,6 +40,7 @@ body {
 }
 
 .header__form-container {
+    position: relative;
     display: flex;
     max-height: 35px;
 }
@@ -69,6 +70,34 @@ body {
 
 .header__search-btn:hover {
     background-color: gray;
+}
+
+.header__options-container {
+    position: absolute;
+    background-color: white;
+    border-radius: 0 0 1rem 1rem;
+    border: 1px solid black;
+    width: 100%;
+    top: 35px;
+    left: 0;
+    padding: 0 .5rem;
+}
+
+.header__search-options {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 4px;
+    margin: 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    cursor: pointer;
+}
+
+.header__search-options:hover {
+    background-color: lightslategray;
+}
+
+.header__search-options p {
+    pointer-events: none;
 }
 
 .header__favorit-menu {

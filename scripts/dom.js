@@ -329,13 +329,28 @@ function checkStars() {
                     node.dataset.favorit = true;
                 }
             }
-
         });
     } catch (error) {
         console.log(error);
     }
 }
 
+function renderSearchOptions(movie) {
+    const artRef = document.createElement(`article`);
+    artRef.dataset.id = movie.imdbID;
+    artRef.classList.add(`header__search-options`);
+
+    let pRef = document.createElement(`p`)
+    pRef.textContent = movie.Title
+    artRef.appendChild(pRef)
+
+    pRef = document.createElement(`p`)
+    pRef.textContent = movie.Year
+    artRef.appendChild(pRef)
+
+    document.querySelector(`.header__options-container`).appendChild(artRef)
+
+}
 export {
     renderStartPage,
     toggleFavorit,
@@ -343,4 +358,5 @@ export {
     checkStars,
     renderFavoritPage,
     renderSearchPage,
+    renderSearchOptions,
 }
