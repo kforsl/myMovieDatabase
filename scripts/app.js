@@ -4,6 +4,7 @@ import {
     renderInformationCard,
     checkStars,
     renderFavoritPage,
+    renderSearchPage,
 } from "./dom.js";
 
 import {
@@ -18,11 +19,15 @@ window.addEventListener(`load`, async () => {
         checkStars()
     } else if (window.location.href.includes(`favorit`)) {
         renderFavoritPage()
-        checkStars()
+
+    } else if (window.location.href.includes(`search`)) {
+        renderSearchPage()
+
     } else {
         renderStartPage()
-
     }
+    document.querySelector(`.header__search-btn`).addEventListener(`click`, searchMovieEvent)
+
 })
 
 async function movieCardEvent(event) {
@@ -35,6 +40,20 @@ async function movieCardEvent(event) {
     }
 
     renderFavoritPage()
+}
+
+async function searchMovieEvent(event) {
+    event.preventDefault()
+    if (document.querySelector(`#searchMovie`).value) {
+        const searchString = document.querySelector(`#searchMovie`)
+        localStorage.setItem(`searchString`, JSON.stringify(searchString.value))
+        searchString.value = ``
+        window.location = `./search.html`
+    } else {
+        console.log(`empty`);
+    }
+
+
 }
 
 export {

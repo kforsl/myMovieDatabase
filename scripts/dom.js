@@ -1,6 +1,7 @@
 import {
     fetchApi,
     fetchMore,
+    fetchSearch,
 } from "./api.js";
 
 import {
@@ -88,7 +89,41 @@ async function renderFavoritPage() {
             card.addEventListener(`click`, movieCardEvent);
         })
     }
+    checkStars()
+}
 
+async function renderSearchPage() {
+    const input = getLocalStorage(`searchString`);
+    const searchResults = await fetchSearch(input)
+    if (window.location.href.includes(`search`)) {
+        if (document.querySelector(`.movies__card-container`) === null) {
+
+            const MoviesRef = document.createElement(`section`);
+            MoviesRef.classList.add(`movies`);
+
+            document.querySelector(`main .wrapper`).appendChild(MoviesRef);
+
+            const h2Ref = document.createElement(`h2`);
+            h2Ref.textContent = `Top 10 results for ${input}`;
+            h2Ref.classList.add(`movies__section-title`);
+            MoviesRef.appendChild(h2Ref);
+
+            const containerRef = document.createElement(`section`);
+            containerRef.classList.add(`movies__card-container`);
+            document.querySelector(`main .movies`).appendChild(containerRef);
+        }
+
+        document.querySelector(`.movies__card-container`).textContent = ``;
+
+        searchResults.forEach(movie => {
+            renderMovieCard(movie)
+        });
+
+        document.querySelectorAll(`.movies__card`).forEach(card => {
+            card.addEventListener(`click`, movieCardEvent);
+        })
+    }
+    checkStars()
 }
 
 function renderTopMovieCard(movie) {
@@ -131,8 +166,8 @@ function renderMovieCard(movie) {
 
     imgRef = document.createElement(`img`);
     imgRef.dataset.id = movie.imdbID;
-    imgRef.dataset.favorit = true;
-    imgRef.src = `./icons/favorite-fill.svg`;
+    imgRef.dataset.favorit = false;
+    imgRef.src = `./icons/favorite-outline.svg`;
     imgRef.alt = `Favorit Star`;
     imgRef.classList.add(`movies__favorit-star`);
     artRef.appendChild(imgRef);
@@ -313,7 +348,6 @@ function checkStars() {
         imgRef.forEach(node => {
             if (node.alt === `Favorit Star`) {
                 if (favorits.includes(node.getAttribute(`data-id`))) {
-
                     node.src = `./icons/favorite-fill.svg`;
                     node.dataset.favorit = true;
                 }
@@ -331,4 +365,5 @@ export {
     renderInformationCard,
     checkStars,
     renderFavoritPage,
+    renderSearchPage,
 }
