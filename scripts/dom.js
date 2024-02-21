@@ -319,7 +319,6 @@ async function renderInformationCard(movieInformation) {
 }
 
 function checkStars() {
-    console.log(`test`);
     try {
         const favorits = getLocalStorage(`favorits`)
         const imgRef = document.querySelectorAll(`img`)
