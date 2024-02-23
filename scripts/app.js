@@ -5,10 +5,12 @@ import {
     checkStars,
     renderFavoritPage,
     renderSearchPage,
+    renderSearchOptions,
 } from "./dom.js";
 
 import {
     fetchMore,
+    fetchSearch,
 } from "./api.js";
 
 window.addEventListener(`load`, async () => {
@@ -27,10 +29,12 @@ window.addEventListener(`load`, async () => {
         renderStartPage()
     }
     document.querySelector(`.header__search-btn`).addEventListener(`click`, searchMovieEvent)
+    document.querySelector(`#searchMovie`).addEventListener(`input`, searchMovieEvent)
 
 })
 
 async function movieCardEvent(event) {
+    console.log(event.target);
     if (event.target.src === undefined) {
         const movieInformation = await fetchMore(event.target.dataset.id)
         localStorage.setItem(`clickedMovie`, JSON.stringify(movieInformation))
@@ -44,16 +48,28 @@ async function movieCardEvent(event) {
 
 async function searchMovieEvent(event) {
     event.preventDefault()
+
     if (document.querySelector(`#searchMovie`).value) {
         const searchString = document.querySelector(`#searchMovie`)
-        localStorage.setItem(`searchString`, JSON.stringify(searchString.value))
-        searchString.value = ``
-        window.location = `./search.html`
+
+        if (event.type === `click`) {
+            localStorage.setItem(`searchString`, JSON.stringify(searchString.value))
+            searchString.value = ``
+            window.location = `./search.html`
+        } else if (event.type === `input`) {
+            const searchResult = await fetchSearch(searchString.value)
+            document.querySelector(`.header__options-container`).textContent = ``
+            searchResult.forEach(result => {
+                renderSearchOptions(result)
+            });
+            const options = document.querySelectorAll(`.header__search-options`)
+            options.forEach(row => {
+                row.addEventListener(`click`, movieCardEvent)
+            });
+        }
     } else {
         console.log(`empty`);
     }
-
-
 }
 
 export {
