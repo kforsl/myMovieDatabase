@@ -16,16 +16,23 @@
                 <a class="header__logo" href="index.html"> MyMovieDataBase </a>
                 <form class="header__form-container">
 
-                    <input type="search" id="searchMovie" class="header__search-bar" placeholder="search..">
+                    <input autocomplete="off" type="search" id="searchMovie" class="header__search-bar"
+                        placeholder="search..">
                     <button class="header__search-btn" id="searchBtn"> <img src="./icons/search.svg"
                             alt="search icon"></button>
+                    <div class="header__options-container"></div>
                 </form>
                 <a href="./favorit.html" class="header__favorit-menu"> Favorits </a>
             </section>
         </div>
     </header>
     <main>
-        <div class="wrapper"></div>
+        <div class="wrapper">
+            <section class="movies">
+                <h2 class="movies__section-title"> My Favorit Movies </h2>
+                <section class="movies__card-container"></section>
+            </section>
+        </div>
     </main>
     <footer class="footer">
         <div class="wrapper">
