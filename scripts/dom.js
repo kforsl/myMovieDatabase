@@ -171,6 +171,19 @@ function renderMovieCard(movie) {
     artRef.appendChild(h3Ref)
 }
 
+function renderRecentlyCard(movie) {
+    const artRef = document.createElement(`article`);
+    artRef.classList.add(`recent-movie__card`);
+    artRef.dataset.id = movie.imdbID;
+    document.querySelector(`.footer__recent-grid`).appendChild(artRef);
+
+    let imgRef = document.createElement(`img`);
+    imgRef.src = movie.Poster;
+    imgRef.alt = `${movie.Title} poster`;
+    imgRef.classList.add(`recent-movie__card-poster`);
+    artRef.appendChild(imgRef);
+}
+
 function toggleFavorit(star) {
     const Response = getLocalStorage(`favorits`)
     let favoritsArray = []
@@ -318,7 +331,6 @@ async function renderInformationCard(movieInformation) {
     pRef.textContent = movieInformation.Actors;
     divRef.appendChild(pRef);
 
-
     /* Bottom Right Elements  */
     sectionRef = document.createElement(`section`);
     sectionRef.classList.add(`movie-informtain__bottom-right`);
@@ -352,6 +364,43 @@ function checkStars() {
     }
 }
 
+function addRecentlyViewed(id) {
+    console.log(`addRecentlyViewed`);
+    const response = getLocalStorage(`recently`)
+    console.log(response);
+    let recentlyArray = []
+
+    if (response === null || response.length === 0) {
+        recentlyArray.unshift(id)
+    } else {
+        response.forEach(id => {
+            if (recentlyArray.length < 6) {
+                recentlyArray.push(id)
+            }
+        });
+        recentlyArray.unshift(id)
+    }
+    addLocalStorage(`recently`, JSON.stringify(recentlyArray))
+}
+
+async function renderRecentlyViewed() {
+    try {
+        const response = getLocalStorage(`recently`)
+
+        if (response !== null) {
+            for (let i = 0; i < response.length; i++) {
+                const movie = await fetchMore(response[i])
+
+                renderRecentlyCard(movie)
+            }
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
 function renderSearchOptions(movie) {
     const artRef = document.createElement(`article`);
     artRef.dataset.id = movie.imdbID;
@@ -368,6 +417,7 @@ function renderSearchOptions(movie) {
     document.querySelector(`.header__options-container`).appendChild(artRef)
 
 }
+
 export {
     renderStartPage,
     toggleFavorit,
@@ -375,5 +425,7 @@ export {
     checkStars,
     renderFavoritPage,
     renderSearchPage,
+    addRecentlyViewed,
+    renderRecentlyViewed,
     renderSearchOptions,
 }

@@ -241,6 +241,8 @@ body {
     gap: 2rem;
 }
 
+
+
 /* Top Movies Card Styling */
 
 .movies__card {
@@ -384,7 +386,7 @@ body {
 .footer {
     background-color: #101313;
     width: 100vw;
-    padding-top: 2rem;
+    padding: 2rem;
     padding-bottom: 4rem;
 }
 
@@ -394,6 +396,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 2rem;
 }
 
 .footer__title {
@@ -405,10 +408,25 @@ body {
     background: none;
     border: none;
     font-size: 14px;
+    cursor: pointer;
+}
+
+.footer__clear-btn:hover {
+    text-decoration: underline;
 }
 
 .footer__recent-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.recent-movie__card {
+    max-width: 175px;
+
+}
+
+.recent-movie__card-poster {
+    width: 100%;
+    border-radius: .5rem;
 }
