@@ -13,14 +13,14 @@ import {
     addLocalStorage
 } from "./localStorage.js";
 
+
+const trailerList = document.querySelectorAll(`.trailers__video`)
+const trailerArray = Array.from(trailerList)
+
 async function renderStartPage() {
     const topMovies = await fetchApi(`https://santosnr6.github.io/Data/movies.json`);
 
     const usedNmbrs = [];
-
-    const trailers = document.createElement(`section`);
-    trailers.classList.add(`trailers`);
-    document.querySelector(`main .wrapper`).appendChild(trailers);
 
     while (usedNmbrs.length < 5) {
         const randomNmbr = Math.floor(Math.random() * topMovies.length)
@@ -28,23 +28,12 @@ async function renderStartPage() {
             usedNmbrs.push(randomNmbr);
         }
     }
+
+    let trailernmbr = 1
     usedNmbrs.forEach(nmbr => {
-        renderTrailers(topMovies[nmbr])
+        renderTrailers(topMovies[nmbr], trailernmbr)
+        trailernmbr++
     });
-
-    const topMoviesRef = document.createElement(`section`);
-    topMoviesRef.classList.add(`top-movies`);
-
-    document.querySelector(`main .wrapper`).appendChild(topMoviesRef);
-
-    const h2Ref = document.createElement(`h2`);
-    h2Ref.textContent = `My Movie Database Top 20`;
-    h2Ref.classList.add(`top-movies__section-title`);
-    topMoviesRef.appendChild(h2Ref);
-
-    const containerRef = document.createElement(`section`);
-    containerRef.classList.add(`top-movies__card-container`);
-    topMoviesRef.appendChild(containerRef);
 
     topMovies.forEach(movie => {
         renderTopMovieCard(movie);
@@ -54,29 +43,46 @@ async function renderStartPage() {
         card.addEventListener(`click`, movieCardEvent);
     })
 
+    const trailerList = document.querySelectorAll(`.trailers__video`)
+    const trailerArray = Array.from(trailerList)
+
+    document.querySelectorAll(`.trailers__arrow`).forEach(arrow => {
+        arrow.addEventListener(`click`, (event) => {
+            changeTrailer(event, trailerList, trailerArray)
+
+        })
+    })
+
     checkStars()
+}
+
+function changeTrailer(event, trailerList, trailerArray) {
+
+    if (event.target.dataset.direction === `right`) {
+        trailerArray.push(trailerArray.shift());
+    } else if (event.target.dataset.direction === `left`) {
+        trailerArray.unshift(trailerArray.pop());
+    }
+
+    trailerList.forEach(item => {
+        item.classList.remove(
+            `trailers__video-1`,
+            `trailers__video-2`,
+            `trailers__video-3`,
+            `trailers__video-4`,
+            `trailers__video-5`
+        )
+    })
+
+    trailerArray.slice(0, 5).forEach((item, i) => {
+        item.classList.add(`trailers__video-${i + 1}`)
+    });
 }
 
 async function renderFavoritPage() {
     const favorits = getLocalStorage(`favorits`);
 
     if (window.location.href.includes(`favorit`)) {
-        if (document.querySelector(`.movies__card-container`) === null) {
-
-            const topMoviesRef = document.createElement(`section`);
-            topMoviesRef.classList.add(`movies`);
-
-            document.querySelector(`main .wrapper`).appendChild(topMoviesRef);
-
-            const h2Ref = document.createElement(`h2`);
-            h2Ref.textContent = `My Favorit Movies`;
-            h2Ref.classList.add(`movies__section-title`);
-            topMoviesRef.appendChild(h2Ref);
-
-            const containerRef = document.createElement(`section`);
-            containerRef.classList.add(`movies__card-container`);
-            document.querySelector(`main .movies`).appendChild(containerRef);
-        }
 
         document.querySelector(`.movies__card-container`).textContent = ``;
 
@@ -96,22 +102,9 @@ async function renderSearchPage() {
     const input = getLocalStorage(`searchString`);
     const searchResults = await fetchSearch(input)
     if (window.location.href.includes(`search`)) {
-        if (document.querySelector(`.movies__card-container`) === null) {
 
-            const MoviesRef = document.createElement(`section`);
-            MoviesRef.classList.add(`movies`);
-
-            document.querySelector(`main .wrapper`).appendChild(MoviesRef);
-
-            const h2Ref = document.createElement(`h2`);
-            h2Ref.textContent = `Top 10 results for ${input}`;
-            h2Ref.classList.add(`movies__section-title`);
-            MoviesRef.appendChild(h2Ref);
-
-            const containerRef = document.createElement(`section`);
-            containerRef.classList.add(`movies__card-container`);
-            document.querySelector(`main .movies`).appendChild(containerRef);
-        }
+        const h2Ref = document.querySelector(`.movies__section-title`);
+        h2Ref.textContent = `Top 10 results for ${input}`;
 
         document.querySelector(`.movies__card-container`).textContent = ``;
 
@@ -204,11 +197,12 @@ function toggleFavorit(star) {
     addLocalStorage(`favorits`, JSON.stringify(favoritsArray))
 }
 
-function renderTrailers(movie) {
+function renderTrailers(movie, num) {
     const iFrameRef = document.createElement(`iframe`);
-    iFrameRef.classList.add(`trailers__video`)
+    iFrameRef.classList.add(`trailers__video`, `trailers__video-${num}`)
     iFrameRef.src = movie.trailer_link
-    document.querySelector(`.trailers`).appendChild(iFrameRef)
+    iFrameRef.dataset.index = num
+    document.querySelector(`.trailers__container`).appendChild(iFrameRef)
 }
 
 async function renderInformationCard(movieInformation) {
