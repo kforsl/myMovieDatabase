@@ -19,7 +19,7 @@ body {
 .header {
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 10;
     background-color: #101313;
     width: 100vw;
     padding: 2rem;
@@ -106,6 +106,111 @@ body {
     font-size: 1.2rem;
 }
 
+/* trailer Section Styling */
+
+.trailers {
+    overflow: hidden;
+    position: relative;
+}
+
+.trailers__arrow {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    z-index: 4;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.trailers__arrow:active {
+    background-color: red;
+
+}
+
+.trailers__arrow--right {
+    right: 1rem;
+}
+
+.trailers__arrow--left {
+    left: 1rem;
+}
+
+.trailers::before,
+.trailers::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    background: linear-gradient(to right, #1c2020 25%, transparent);
+    height: 100%;
+    width: 25%;
+    z-index: 3;
+}
+
+.trailers::before {
+    background: linear-gradient(to right, #1c2020 25%, transparent);
+    left: 0px;
+}
+
+.trailers::after {
+    background: linear-gradient(to left, #1c2020 25%, transparent);
+    right: 0px;
+}
+
+.trailers__container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0 3rem;
+    height: 350px;
+}
+
+.trailers__video {
+    height: 250px;
+    aspect-ratio: 16/9;
+    pointer-events: none;
+    position: absolute;
+    transition: all .3s ease-in-out;
+    z-index: 0;
+    border-radius: .6rem;
+    transform: translateX(-50%);
+}
+
+.trailers__video-1 {
+    left: 15%;
+    opacity: .4;
+}
+
+.trailers__video-2,
+.trailers__video-4 {
+    height: 300px;
+    left: 15%;
+    opacity: .8;
+    z-index: 1;
+}
+
+.trailers__video-2 {
+    left: 30%;
+}
+
+.trailers__video-3 {
+    height: 350px;
+    opacity: 1;
+    left: 50%;
+    z-index: 2;
+    pointer-events: all;
+}
+
+.trailers__video-4 {
+    left: 70%;
+}
+
+.trailers__video-5 {
+    left: 85%;
+    opacity: .4;
+}
+
 /* Top Movies Styling */
 .movies,
 .top-movies {
@@ -171,8 +276,13 @@ body {
     right: 0;
     background-color: rgba(0, 0, 0, .75);
     padding: .6rem;
-    padding-top: .8rem;
     border-radius: 0 0 0 1rem;
+}
+
+.movies__favorit-star:hover {
+    background-image: url(./icons/favorite-fill.svg);
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .movies__card-title {
