@@ -366,10 +366,10 @@ function checkStars() {
 }
 
 function addRecentlyViewed(id) {
-    console.log(`addRecentlyViewed`);
-    const response = getLocalStorage(`recently`)
-    console.log(response);
+    let response = getLocalStorage(`recently`)
     let recentlyArray = []
+
+    response = response.filter(item => item !== id)
 
     if (response === null || response.length === 0) {
         recentlyArray.unshift(id)
