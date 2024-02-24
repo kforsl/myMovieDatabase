@@ -38,7 +38,6 @@ body {
 
 .wrapper {
     max-width: 1440px;
-    min-width: 400px;
     margin: 0 auto;
 }
 
@@ -555,13 +554,12 @@ body {
 @media screen and (max-width: 750px) {
 
     .header__logo {
-        text-decoration: none;
-        color: white;
-        font-size: 0;
+        display: none;
     }
 
     .header__form-container {
         min-width: 400px;
+        justify-content: space-evenly;
     }
 
     .header__favorit-menu {
@@ -635,5 +633,11 @@ body {
 
     .trailers__video-3 {
         height: 200px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .header__form-container {
+        min-width: 300px;
     }
 }
