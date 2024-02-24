@@ -289,6 +289,13 @@ body {
     gap: var(--gap-1);
 }
 
+.movies__card-container h2 {
+    margin: 0 auto;
+    color: white;
+    max-width: 500px;
+    text-align: center;
+}
+
 /* Top Movies Card Styling */
 
 .movies__card {

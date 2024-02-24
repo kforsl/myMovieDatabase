@@ -78,19 +78,24 @@ function changeTrailer(event, trailerList, trailerArray) {
 async function renderFavoritPage() {
     const favorits = getLocalStorage(`favorits`);
 
+
     if (window.location.href.includes(`favorit`)) {
 
-        document.querySelector(`.movies__card-container`).textContent = ``;
 
-        for (let i = 0; i < favorits.length; i++) {
-            const movie = await fetchMore(favorits[i])
-            renderMovieCard(movie)
-            checkStars()
+        if (favorits !== null) {
+            document.querySelector(`.movies__card-container`).textContent = ``;
+
+            for (let i = 0; i < favorits.length; i++) {
+                const movie = await fetchMore(favorits[i])
+                renderMovieCard(movie)
+                checkStars()
+            }
+
+            document.querySelectorAll(`.movies__card`).forEach(card => {
+                card.addEventListener(`click`, movieCardEvent);
+            })
         }
 
-        document.querySelectorAll(`.movies__card`).forEach(card => {
-            card.addEventListener(`click`, movieCardEvent);
-        })
     }
 
 }
@@ -351,15 +356,17 @@ async function renderInformationCard(movieInformation) {
 function checkStars() {
     try {
         const favorits = getLocalStorage(`favorits`)
-        const imgRef = document.querySelectorAll(`img`)
-        imgRef.forEach(node => {
-            if (node.alt === `Favorit Star`) {
-                if (favorits.includes(node.getAttribute(`data-id`))) {
-                    node.src = `./icons/favorite-fill.svg`;
-                    node.dataset.favorit = true;
+        if (favorits !== null) {
+            const imgRef = document.querySelectorAll(`img`)
+            imgRef.forEach(node => {
+                if (node.alt === `Favorit Star`) {
+                    if (favorits.includes(node.getAttribute(`data-id`))) {
+                        node.src = `./icons/favorite-fill.svg`;
+                        node.dataset.favorit = true;
+                    }
                 }
-            }
-        });
+            });
+        }
     } catch (error) {
         console.log(error);
     }
