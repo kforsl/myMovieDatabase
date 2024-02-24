@@ -371,7 +371,6 @@ body {
     display: flex;
     flex-direction: column;
     max-width: 1000px;
-    max-height: 495px;
     margin-bottom: var(--gap-2);
 
 }
@@ -550,7 +549,6 @@ body {
 
     .movie-information__card {
         max-width: 725px;
-        max-height: 495px;
     }
 }
 
@@ -591,10 +589,6 @@ body {
 
     .trailers__video-3 {
         height: 250px;
-    }
-
-    .movie-information__card {
-        max-height: none;
     }
 
     .movie-information__image-container {
