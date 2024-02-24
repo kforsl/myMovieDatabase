@@ -369,11 +369,11 @@ function addRecentlyViewed(id) {
     let response = getLocalStorage(`recently`)
     let recentlyArray = []
 
-    response = response.filter(item => item !== id)
-
     if (response === null || response.length === 0) {
         recentlyArray.unshift(id)
     } else {
+        response = response.filter(item => item !== id)
+
         response.forEach(id => {
             if (recentlyArray.length < 6) {
                 recentlyArray.push(id)
