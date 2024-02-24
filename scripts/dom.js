@@ -13,10 +13,6 @@ import {
     addLocalStorage
 } from "./localStorage.js";
 
-
-const trailerList = document.querySelectorAll(`.trailers__video`)
-const trailerArray = Array.from(trailerList)
-
 async function renderStartPage() {
     const topMovies = await fetchApi(`https://santosnr6.github.io/Data/movies.json`);
 
@@ -89,13 +85,14 @@ async function renderFavoritPage() {
         for (let i = 0; i < favorits.length; i++) {
             const movie = await fetchMore(favorits[i])
             renderMovieCard(movie)
+            checkStars()
         }
 
         document.querySelectorAll(`.movies__card`).forEach(card => {
             card.addEventListener(`click`, movieCardEvent);
         })
     }
-    checkStars()
+
 }
 
 async function renderSearchPage() {
@@ -220,55 +217,55 @@ function renderTrailers(movie, num) {
 
 async function renderInformationCard(movieInformation) {
 
-    let sectionRef = document.createElement(`section`);
-    sectionRef.classList.add(`movie-information`);
-    document.querySelector(`main .wrapper`).appendChild(sectionRef);
+
 
     /* Movie Information Card */
     const artRef = document.createElement(`article`);
     artRef.classList.add(`movie-information__card`);
-    sectionRef.appendChild(artRef);
+    document.querySelector(`.movie-information`).appendChild(artRef);
 
-    /* Image Container ELements */
-    sectionRef = document.createElement(`section`);
-    sectionRef.classList.add(`movie-information__image-container`);
+    let sectionRef = document.createElement(`section`);
+    sectionRef.classList.add(`movie-information__title-container`);
     artRef.appendChild(sectionRef);
-
-    let imgRef = document.createElement(`img`);
-    imgRef.src = movieInformation.Poster;
-    imgRef.alt = `${movieInformation.Title} poster`;
-    sectionRef.appendChild(imgRef);
-
-    /* Text Container ELements */
-    sectionRef = document.createElement(`section`);
-    sectionRef.classList.add(`movie-information__text-container`);
-    artRef.appendChild(sectionRef);
-
-    /* Top Section Elements */
-    let divRef = document.createElement(`div`);
-    divRef.classList.add(`movie-information__top-section`);
-    sectionRef.appendChild(divRef);
 
     const h2Ref = document.createElement(`h2`);
     h2Ref.classList.add(`movie-information__movie-title`);
     h2Ref.textContent = movieInformation.Title;
-    divRef.appendChild(h2Ref);
+    sectionRef.appendChild(h2Ref);
 
-    imgRef = document.createElement(`img`);
+    let imgRef = document.createElement(`img`);
     imgRef.src = `./icons/favorite-outline.svg`;
     imgRef.alt = `Favorit Star`;
     imgRef.dataset.favorit = false;
     imgRef.dataset.id = movieInformation.imdbID;
     imgRef.addEventListener(`click`, movieCardEvent)
-    divRef.appendChild(imgRef);
+    sectionRef.appendChild(imgRef);
 
-    /* Middle Section Elements  */
-    divRef = document.createElement(`div`);
-    divRef.classList.add(`movie-information__middle-section`);
-    sectionRef.appendChild(divRef);
+    sectionRef = document.createElement(`section`);
+    sectionRef.classList.add(`movie-information__information-container`);
+    artRef.appendChild(sectionRef);
+
+    /* Image Container ELements */
+    const figRef = document.createElement(`figure`);
+    figRef.classList.add(`movie-information__image-container`);
+    sectionRef.appendChild(figRef);
+
+    imgRef = document.createElement(`img`);
+    imgRef.src = movieInformation.Poster;
+    imgRef.alt = `${movieInformation.Title} poster`;
+    figRef.appendChild(imgRef);
+
+    /* Text Container ELements */
+    const sectionRefTwo = document.createElement(`section`);
+    sectionRefTwo.classList.add(`movie-information__text-container`);
+    sectionRef.appendChild(sectionRefTwo);
+
+    /* Top Section Elements */
+    let divRef = document.createElement(`div`);
+    divRef.classList.add(`movie-information__top-section`);
+    sectionRefTwo.appendChild(divRef);
 
     const tags = [
-        `${movieInformation.Type}`,
         `Rated: ${movieInformation.Rated}`,
         `Genre: ${movieInformation.Genre}`,
         `Runtime: ${movieInformation.Runtime}`,
@@ -282,69 +279,71 @@ async function renderInformationCard(movieInformation) {
         divRef.appendChild(pRef);
     });
 
-    /* Bottom Section Elements */
-    divRef = document.createElement(`div`);
-    divRef.classList.add(`movie-informtain__bottom-section`);
-    sectionRef.appendChild(divRef);
 
-    /* Bottom Left Elements */
-    sectionRef = document.createElement(`section`);
-    sectionRef.classList.add(`movie-informtain__bottom-left`);
-    divRef.appendChild(sectionRef);
 
+    /* Middle Section Elements  */
     divRef = document.createElement(`div`);
-    sectionRef.appendChild(divRef);
+    divRef.classList.add(`movie-information__middle-section`);
+    sectionRefTwo.appendChild(divRef);
 
     let h3Ref = document.createElement(`h3`);
     h3Ref.classList.add(`movie-informtain__sub-title`);
-    h3Ref.textContent = `Director: `
+    h3Ref.textContent = `Plot`
     divRef.appendChild(h3Ref);
 
     let pRef = document.createElement(`p`);
     pRef.classList.add(`movie-informtain__description`);
-    pRef.textContent = movieInformation.Director;
+    pRef.textContent = movieInformation.Plot;
     divRef.appendChild(pRef);
 
+
+
+    /* Bottom Section Elements */
     divRef = document.createElement(`div`);
-    sectionRef.appendChild(divRef);
+    divRef.classList.add(`movie-informtain__bottom-section`);
+    sectionRefTwo.appendChild(divRef);
+
+    let divTwoRef = document.createElement(`div`);
+    divRef.appendChild(divTwoRef);
+
+    h3Ref = document.createElement(`h3`);
+    h3Ref.classList.add(`movie-informtain__sub-title`);
+    h3Ref.textContent = `Director: `
+    divTwoRef.appendChild(h3Ref);
+
+    pRef = document.createElement(`p`);
+    pRef.classList.add(`movie-informtain__description`);
+    pRef.textContent = movieInformation.Director;
+    divTwoRef.appendChild(pRef);
+
+    divTwoRef = document.createElement(`div`);
+    divRef.appendChild(divTwoRef);
 
     h3Ref = document.createElement(`h3`);
     h3Ref.classList.add(`movie-informtain__sub-title`);
     h3Ref.textContent = `Writer: `
-    divRef.appendChild(h3Ref);
+    divTwoRef.appendChild(h3Ref);
 
     pRef = document.createElement(`p`);
     pRef.classList.add(`movie-informtain__description`);
     pRef.textContent = movieInformation.Writer;
-    divRef.appendChild(pRef);
+    divTwoRef.appendChild(pRef);
 
-    divRef = document.createElement(`div`);
-    sectionRef.appendChild(divRef);
+    divTwoRef = document.createElement(`div`);
+    divRef.appendChild(divTwoRef);
 
     h3Ref = document.createElement(`h3`);
     h3Ref.classList.add(`movie-informtain__sub-title`);
     h3Ref.textContent = `Actors: `
-    divRef.appendChild(h3Ref);
+    divTwoRef.appendChild(h3Ref);
 
     pRef = document.createElement(`p`);
     pRef.classList.add(`movie-informtain__description`);
     pRef.textContent = movieInformation.Actors;
-    divRef.appendChild(pRef);
+    divTwoRef.appendChild(pRef);
 
     /* Bottom Right Elements  */
-    sectionRef = document.createElement(`section`);
-    sectionRef.classList.add(`movie-informtain__bottom-right`);
-    document.querySelector(`.movie-informtain__bottom-section`).appendChild(sectionRef);
 
-    h3Ref = document.createElement(`h3`);
-    h3Ref.classList.add(`movie-informtain__sub-title`);
-    h3Ref.textContent = `Plot`
-    sectionRef.appendChild(h3Ref);
-
-    pRef = document.createElement(`p`);
-    pRef.classList.add(`movie-informtain__description`);
-    pRef.textContent = movieInformation.Plot;
-    sectionRef.appendChild(pRef);
 }
 
 function checkStars() {
