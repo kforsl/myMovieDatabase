@@ -179,6 +179,8 @@ function renderRecentlyCard(movie) {
     imgRef.alt = `${movie.Title} poster`;
     imgRef.classList.add(`recent-movie__card-poster`);
     artRef.appendChild(imgRef);
+
+    artRef.addEventListener(`click`, movieCardEvent)
 }
 
 function toggleFavorit(star) {
