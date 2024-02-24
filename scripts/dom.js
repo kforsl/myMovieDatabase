@@ -85,13 +85,14 @@ async function renderFavoritPage() {
         for (let i = 0; i < favorits.length; i++) {
             const movie = await fetchMore(favorits[i])
             renderMovieCard(movie)
+            checkStars()
         }
 
         document.querySelectorAll(`.movies__card`).forEach(card => {
             card.addEventListener(`click`, movieCardEvent);
         })
     }
-    checkStars()
+
 }
 
 async function renderSearchPage() {
