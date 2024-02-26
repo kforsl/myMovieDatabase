@@ -24,6 +24,15 @@ body {
     font-family: var(--font-style);
 }
 
+h2 {
+    font-weight: 400;
+}
+
+.wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
 /* Scrollbar styling */
 
 ::-webkit-scrollbar {
@@ -31,17 +40,13 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-color-300);
+    background: var(--bg-color-200);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--bg-color-200);
-    border-radius: .5rem;
-}
 
-.wrapper {
-    max-width: 1440px;
-    margin: 0 auto;
+    background: #000000;
+    border-radius: .5rem;
 }
 
 /* header Styling */
@@ -259,7 +264,7 @@ body {
     opacity: .4;
 }
 
-/* Top Movies Styling */
+/* Movie Card section Grid and styling  */
 .movies,
 .top-movies {
     display: flex;
@@ -298,7 +303,7 @@ body {
     text-align: center;
 }
 
-/* Top Movies Card Styling */
+/* Movies Card Styling */
 
 .movies__card {
     margin: auto;
@@ -319,7 +324,6 @@ body {
 .movies__poster-container {
     width: 100%;
     pointer-events: none;
-
 }
 
 .movies__card-poster {
@@ -382,7 +386,7 @@ body {
 
 .movie-information__image-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .movie-information__information-container {
@@ -474,6 +478,8 @@ body {
     text-decoration: underline;
 }
 
+/* Footer recently viewed styling */
+
 .footer__recent-grid {
     display: flex;
     justify-content: flex-start;
@@ -503,6 +509,8 @@ body {
     filter: brightness(75%);
     pointer-events: none;
 }
+
+/* Media Queris */
 
 @media screen and (max-width: 1030px) {
     :root {
@@ -547,11 +555,9 @@ body {
         height: 150px;
     }
 
-
     .trailers__video-2,
     .trailers__video-4 {
         height: 200px;
-
     }
 
     .trailers__video-3 {
@@ -581,7 +587,6 @@ body {
     .trailers__arrow {
         height: 30px;
         width: 30px;
-
     }
 
     .trailers__container {
@@ -592,11 +597,9 @@ body {
         height: 100px;
     }
 
-
     .trailers__video-2,
     .trailers__video-4 {
         height: 150px;
-
     }
 
     .trailers__video-3 {
