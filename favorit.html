@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> MyMovieDatabase </title>
+    <link rel="icon" type="image/x-icon" href="./icons/Logo-small.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="wrapper">
+            <section class="header__container">
+                <a class="header__logo" href="index.html"> MyMovieDataBase </a>
+                <form class="header__form-container">
+
+                    <input autocomplete="off" type="search" id="searchMovie" class="header__search-bar"
+                        placeholder="search..">
+                    <button class="header__search-btn" id="searchBtn"> <img src="./icons/search.svg"
+                            alt="search icon"></button>
+                    <div class="header__options-container"></div>
+                </form>
+                <a href="./favorit.html" class="header__favorit-menu"> <img class="header__favorit-star"
+                        src="./icons/favorite-fill.svg" alt="favorit menu icon"> Favorits </a>
+            </section>
+        </div>
+    </header>
+    <main>
+        <div class="wrapper">
+            <section class="movies">
+                <h2 class="movies__section-title"> My Favorit Movies </h2>
+                <section class="movies__card-container"></section>
+            </section>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="wrapper">
+            <article class="footer__container">
+                <section class="footer__text-container">
+                    <h2 class="footer__title"> Recently viewed </h2>
+                    <button class="footer__clear-btn"> Clear recently viewed </button>
+                </section>
+                <section class="footer__recent-grid">
+
+                </section>
+            </article>
+        </div>
+    </footer>
+    <script type="module" src="./scripts/app.js"></script>
+</body>
+
+</html>
