@@ -291,6 +291,13 @@ body {
     gap: var(--gap-1);
 }
 
+.movies__card-container h2 {
+    margin: 0 auto;
+    color: white;
+    max-width: 500px;
+    text-align: center;
+}
+
 /* Top Movies Card Styling */
 
 .movies__card {
@@ -371,7 +378,6 @@ body {
     align-items: center;
     padding: 1rem;
     padding-top: 0;
-    /* border-bottom: #fff 1px solid; */
 }
 
 .movie-information__image-container {
@@ -495,6 +501,7 @@ body {
     aspect-ratio: 2/3;
     object-fit: cover;
     filter: brightness(75%);
+    pointer-events: none;
 }
 
 @media screen and (max-width: 1030px) {
@@ -557,7 +564,6 @@ body {
 
     .movie-information__information-container {
         flex-direction: column;
-
     }
 
 }

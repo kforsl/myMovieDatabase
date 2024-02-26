@@ -78,20 +78,26 @@ function changeTrailer(event, trailerList, trailerArray) {
 async function renderFavoritPage() {
     const favorits = getLocalStorage(`favorits`);
 
+
     if (window.location.href.includes(`favorit`)) {
 
-        document.querySelector(`.movies__card-container`).textContent = ``;
 
-        for (let i = 0; i < favorits.length; i++) {
-            const movie = await fetchMore(favorits[i])
-            renderMovieCard(movie)
+        if (favorits !== null) {
+            document.querySelector(`.movies__card-container`).textContent = ``;
+
+            for (let i = 0; i < favorits.length; i++) {
+                const movie = await fetchMore(favorits[i])
+                renderMovieCard(movie)
+                checkStars()
+            }
+
+            document.querySelectorAll(`.movies__card`).forEach(card => {
+                card.addEventListener(`click`, movieCardEvent);
+            })
         }
 
-        document.querySelectorAll(`.movies__card`).forEach(card => {
-            card.addEventListener(`click`, movieCardEvent);
-        })
     }
-    checkStars()
+
 }
 
 async function renderSearchPage() {
@@ -178,6 +184,8 @@ function renderRecentlyCard(movie) {
     imgRef.alt = `${movie.Title} poster`;
     imgRef.classList.add(`recent-movie__card-poster`);
     artRef.appendChild(imgRef);
+
+    artRef.addEventListener(`click`, movieCardEvent)
 }
 
 function toggleFavorit(star) {
@@ -348,29 +356,31 @@ async function renderInformationCard(movieInformation) {
 function checkStars() {
     try {
         const favorits = getLocalStorage(`favorits`)
-        const imgRef = document.querySelectorAll(`img`)
-        imgRef.forEach(node => {
-            if (node.alt === `Favorit Star`) {
-                if (favorits.includes(node.getAttribute(`data-id`))) {
-                    node.src = `./icons/favorite-fill.svg`;
-                    node.dataset.favorit = true;
+        if (favorits !== null) {
+            const imgRef = document.querySelectorAll(`img`)
+            imgRef.forEach(node => {
+                if (node.alt === `Favorit Star`) {
+                    if (favorits.includes(node.getAttribute(`data-id`))) {
+                        node.src = `./icons/favorite-fill.svg`;
+                        node.dataset.favorit = true;
+                    }
                 }
-            }
-        });
+            });
+        }
     } catch (error) {
         console.log(error);
     }
 }
 
 function addRecentlyViewed(id) {
-    console.log(`addRecentlyViewed`);
-    const response = getLocalStorage(`recently`)
-    console.log(response);
+    let response = getLocalStorage(`recently`)
     let recentlyArray = []
 
     if (response === null || response.length === 0) {
         recentlyArray.unshift(id)
     } else {
+        response = response.filter(item => item !== id)
+
         response.forEach(id => {
             if (recentlyArray.length < 6) {
                 recentlyArray.push(id)
