@@ -154,7 +154,12 @@ function renderMovieCard(movie) {
     document.querySelector(`.movies__card-container`).appendChild(artRef);
 
     let imgRef = document.createElement(`img`);
-    imgRef.src = movie.Poster;
+    if (movie.Poster === `N/A`) {
+        imgRef.src = `./icons/missing-poster.svg`
+    } else {
+        imgRef.src = movie.Poster;
+    }
+
     imgRef.alt = `${movie.Title} poster`;
     imgRef.classList.add(`movies__card-poster`);
     artRef.appendChild(imgRef);
@@ -180,7 +185,11 @@ function renderRecentlyCard(movie) {
     document.querySelector(`.footer__recent-grid`).appendChild(artRef);
 
     let imgRef = document.createElement(`img`);
-    imgRef.src = movie.Poster;
+    if (movie.Poster === `N/A`) {
+        imgRef.src = `./icons/missing-poster.svg`
+    } else {
+        imgRef.src = movie.Poster;
+    }
     imgRef.alt = `${movie.Title} poster`;
     imgRef.classList.add(`recent-movie__card-poster`);
     artRef.appendChild(imgRef);
@@ -258,7 +267,11 @@ async function renderInformationCard(movieInformation) {
     sectionRef.appendChild(figRef);
 
     imgRef = document.createElement(`img`);
-    imgRef.src = movieInformation.Poster;
+    if (movieInformation.Poster === `N/A`) {
+        imgRef.src = `./icons/missing-poster.svg`
+    } else {
+        imgRef.src = movieInformation.Poster;
+    }
     imgRef.alt = `${movieInformation.Title} poster`;
     figRef.appendChild(imgRef);
 
@@ -272,13 +285,22 @@ async function renderInformationCard(movieInformation) {
     divRef.classList.add(`movie-information__top-section`);
     sectionRefTwo.appendChild(divRef);
 
-    const tags = [
-        `Rated: ${movieInformation.Rated}`,
-        `Genre: ${movieInformation.Genre}`,
-        `Runtime: ${movieInformation.Runtime}`,
-        `Released: ${movieInformation.Released}`,
-        `Ratings: ${movieInformation.Ratings[0].Value}`
-    ]
+    const tags = []
+    if (movieInformation.Rated) {
+        tags.push(`Rated: ${movieInformation.Rated}`)
+    }
+    if (movieInformation.Genre) {
+        tags.push(`Genre: ${movieInformation.Genre}`)
+    }
+    if (movieInformation.Runtime) {
+        tags.push(`Runtime: ${movieInformation.Runtime}`)
+    }
+    if (movieInformation.Released) {
+        tags.push(`Released: ${movieInformation.Released}`)
+    }
+    if (movieInformation.Ratings.length !== 0) {
+        tags.push(`Ratings: ${movieInformation.Ratings[0].Value}`)
+    }
     tags.forEach(tag => {
         let pRef = document.createElement(`p`);
         pRef.classList.add(`movie-information__movie-tags`)

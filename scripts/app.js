@@ -49,7 +49,6 @@ window.addEventListener(`load`, async () => {
 })
 
 async function movieCardEvent(event) {
-    console.log(event.target);
     if (event.target.src === undefined) {
         const movieInformation = await fetchMore(event.target.dataset.id)
         localStorage.setItem(`clickedMovie`, JSON.stringify(movieInformation))
@@ -83,8 +82,6 @@ async function searchMovieEvent(event) {
                 row.addEventListener(`click`, movieCardEvent)
             });
         }
-    } else {
-        console.log(`empty`);
     }
 }
 
