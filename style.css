@@ -71,6 +71,9 @@ h2 {
 
 .header__logo {
     text-decoration: none;
+}
+
+.header__logo-text {
     color: white;
     font-size: 1.3rem;
 }
@@ -610,5 +613,10 @@ h2 {
 @media screen and (max-width: 450px) {
     .header__form-container {
         min-width: 300px;
+    }
+
+    .movies__card-container,
+    .top-movies__card-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 }
