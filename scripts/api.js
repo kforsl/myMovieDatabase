@@ -5,7 +5,7 @@ const apiKey = `810608b8`;
 async function fetchApi(apiUrl) {
     try {
         const results = await fetch(apiUrl);
-        return await results.json()
+        return await results.json();
     } catch (error) {
         console.log(error);
     }
@@ -14,7 +14,7 @@ async function fetchApi(apiUrl) {
 // Function to get information about a specific movie from the omdbApi
 async function fetchMore(id) {
     try {
-        return await fetchApi(`http://www.omdbapi.com/?apikey=${apiKey}&plot=full&i=${id}`)
+        return await fetchApi(`http://www.omdbapi.com/?apikey=${apiKey}&plot=full&i=${id}`);
     } catch (error) {
         console.log(error);
     }
@@ -23,8 +23,8 @@ async function fetchMore(id) {
 // Function to get the search resaults from the omdbApi
 async function fetchSearch(input) {
     try {
-        const searchResult = await fetchApi(`http://www.omdbapi.com/?apikey=${apiKey}&plot=full&s=${input}`)
-        return searchResult.Search
+        const searchResult = await fetchApi(`http://www.omdbapi.com/?apikey=${apiKey}&plot=full&s=${input}`);
+        return searchResult.Search;
     } catch (error) {
         console.log(error);
     }

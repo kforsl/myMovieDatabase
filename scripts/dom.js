@@ -23,7 +23,7 @@ async function renderStartPage() {
 
     // add five different random number to usedNmbrs array 
     while (usedNmbrs.length < 5) {
-        const randomNmbr = Math.floor(Math.random() * topMovies.length)
+        const randomNmbr = Math.floor(Math.random() * topMovies.length);
         if (!usedNmbrs.includes(randomNmbr)) {
             usedNmbrs.push(randomNmbr);
         }
@@ -32,8 +32,8 @@ async function renderStartPage() {
     // render the five trailers to the page. 
     let trailernmbr = 1 // number used in classname to position trailers 
     usedNmbrs.forEach(nmbr => {
-        renderTrailers(topMovies[nmbr], trailernmbr)
-        trailernmbr++
+        renderTrailers(topMovies[nmbr], trailernmbr);
+        trailernmbr++;
     });
 
     // Render the startpage with to 20 movies 
@@ -47,18 +47,18 @@ async function renderStartPage() {
     })
 
     // set an array with the order of the trailes, used to change order on the page
-    const trailerList = document.querySelectorAll(`.trailers__video`)
-    const trailerArray = Array.from(trailerList)
+    const trailerList = document.querySelectorAll(`.trailers__video`);
+    const trailerArray = Array.from(trailerList);
 
     // add eventlistener to the arrows in the trailer section to navigate left and right 
     document.querySelectorAll(`.trailers__arrow`).forEach(arrow => {
         arrow.addEventListener(`click`, (event) => {
-            changeTrailer(event, trailerList, trailerArray)
-        })
+            changeTrailer(event, trailerList, trailerArray);
+        });
     })
 
     // change all the stars to full if the movie is a favorit
-    checkStars()
+    checkStars();
 }
 
 async function renderFavoritPage() {
@@ -72,15 +72,15 @@ async function renderFavoritPage() {
             document.querySelector(`.movies__card-container`).textContent = ``;
 
             for (let i = 0; i < favorits.length; i++) {
-                const movie = await fetchMore(favorits[i])
-                renderMovieCard(movie)
-                checkStars()
+                const movie = await fetchMore(favorits[i]);
+                renderMovieCard(movie);
+                checkStars();
             }
 
             // add eventlistener to the moviecard
             document.querySelectorAll(`.movies__card`).forEach(card => {
                 card.addEventListener(`click`, movieCardEvent);
-            })
+            });
         }
 
         // Renders out a message if no movie is saved in localStorage
@@ -88,7 +88,7 @@ async function renderFavoritPage() {
             document.querySelector(`.movies__card-container`).innerHTML =
                 `<h2> It seems that there are currently no favorite movies listed on your profile.<br>
                 Feel free to add your favorite movies to personalize your experience.</h2>`;
-        }
+        };
     }
 
 }
@@ -98,7 +98,7 @@ async function renderSearchPage() {
     const input = getLocalStorage(`searchString`);
 
     // fetch information from api with search string 
-    const searchResults = await fetchSearch(input)
+    const searchResults = await fetchSearch(input);
 
     // check if resault of search found any movies  
     if (searchResults) {
@@ -113,7 +113,7 @@ async function renderSearchPage() {
 
             // render moviecard for all the results 
             searchResults.forEach(movie => {
-                renderMovieCard(movie)
+                renderMovieCard(movie);
             });
 
             // add eventlisterner to the moviecards
@@ -122,7 +122,7 @@ async function renderSearchPage() {
             })
         }
         // change all movies in favorit to solid star on the card
-        checkStars()
+        checkStars();
     }
     // Show message if no results was found 
     else {
@@ -153,7 +153,7 @@ async function renderInformationCard(movieInformation) {
     imgRef.alt = `Favorit Star`;
     imgRef.dataset.favorit = false;
     imgRef.dataset.id = movieInformation.imdbID;
-    imgRef.addEventListener(`click`, movieCardEvent)
+    imgRef.addEventListener(`click`, movieCardEvent);
     sectionRef.appendChild(imgRef);
 
     // create a container for all other information on the card 
@@ -169,7 +169,7 @@ async function renderInformationCard(movieInformation) {
     // create image and set src to poster and missing poster svg if poster is missing 
     imgRef = document.createElement(`img`);
     if (movieInformation.Poster === `N/A`) {
-        imgRef.src = `./icons/missing-poster.svg`
+        imgRef.src = `./icons/missing-poster.svg`;
     } else {
         imgRef.src = movieInformation.Poster;
     }
@@ -188,23 +188,23 @@ async function renderInformationCard(movieInformation) {
 
     const tags = []
     if (movieInformation.Rated) {
-        tags.push(`Rated: ${movieInformation.Rated}`)
+        tags.push(`Rated: ${movieInformation.Rated}`);
     }
     if (movieInformation.Genre) {
-        tags.push(`Genre: ${movieInformation.Genre}`)
+        tags.push(`Genre: ${movieInformation.Genre}`);
     }
     if (movieInformation.Runtime) {
-        tags.push(`Runtime: ${movieInformation.Runtime}`)
+        tags.push(`Runtime: ${movieInformation.Runtime}`);
     }
     if (movieInformation.Released) {
-        tags.push(`Released: ${movieInformation.Released}`)
+        tags.push(`Released: ${movieInformation.Released}`);
     }
     if (movieInformation.Ratings.length !== 0) {
-        tags.push(`Ratings: ${movieInformation.Ratings[0].Value}`)
+        tags.push(`Ratings: ${movieInformation.Ratings[0].Value}`);
     }
     tags.forEach(tag => {
         let pRef = document.createElement(`p`);
-        pRef.classList.add(`movie-information__movie-tags`)
+        pRef.classList.add(`movie-information__movie-tags`);
         pRef.textContent = tag;
         divRef.appendChild(pRef);
     });
@@ -216,7 +216,7 @@ async function renderInformationCard(movieInformation) {
 
     let h3Ref = document.createElement(`h3`);
     h3Ref.classList.add(`movie-informtain__sub-title`);
-    h3Ref.textContent = `Plot`
+    h3Ref.textContent = `Plot`;
     divRef.appendChild(h3Ref);
 
     let pRef = document.createElement(`p`);
@@ -235,7 +235,7 @@ async function renderInformationCard(movieInformation) {
 
     h3Ref = document.createElement(`h3`);
     h3Ref.classList.add(`movie-informtain__sub-title`);
-    h3Ref.textContent = `Director: `
+    h3Ref.textContent = `Director: `;
     divTwoRef.appendChild(h3Ref);
 
     pRef = document.createElement(`p`);
@@ -249,7 +249,7 @@ async function renderInformationCard(movieInformation) {
 
     h3Ref = document.createElement(`h3`);
     h3Ref.classList.add(`movie-informtain__sub-title`);
-    h3Ref.textContent = `Writer: `
+    h3Ref.textContent = `Writer: `;
     divTwoRef.appendChild(h3Ref);
 
     pRef = document.createElement(`p`);
@@ -263,7 +263,7 @@ async function renderInformationCard(movieInformation) {
 
     h3Ref = document.createElement(`h3`);
     h3Ref.classList.add(`movie-informtain__sub-title`);
-    h3Ref.textContent = `Actors: `
+    h3Ref.textContent = `Actors: `;
     divTwoRef.appendChild(h3Ref);
 
     pRef = document.createElement(`p`);
@@ -294,8 +294,8 @@ function changeTrailer(event, trailerList, trailerArray) {
             `trailers__video-3`,
             `trailers__video-4`,
             `trailers__video-5`
-        )
-    })
+        );
+    });
 
     // add class to every trailer for position 
     trailerArray.slice(0, 5).forEach((item, i) => {
@@ -306,9 +306,9 @@ function changeTrailer(event, trailerList, trailerArray) {
 // function to render the trailers to the dom
 function renderTrailers(movie, num) {
     const iFrameRef = document.createElement(`iframe`);
-    iFrameRef.classList.add(`trailers__video`, `trailers__video-${num}`)
-    iFrameRef.src = movie.trailer_link
-    document.querySelector(`.trailers__container`).appendChild(iFrameRef)
+    iFrameRef.classList.add(`trailers__video`, `trailers__video-${num}`);
+    iFrameRef.src = movie.trailer_link;
+    document.querySelector(`.trailers__container`).appendChild(iFrameRef);
 }
 
 // functions for rendering movieCards 
@@ -341,7 +341,7 @@ function renderTopMovieCard(movie) {
     const h3Ref = document.createElement(`h3`);
     h3Ref.classList.add(`movies__card-title`);
     h3Ref.textContent = movie.title;
-    artRef.appendChild(h3Ref)
+    artRef.appendChild(h3Ref);
 }
 
 function renderMovieCard(movie) {
@@ -356,7 +356,7 @@ function renderMovieCard(movie) {
     let imgRef = document.createElement(`img`);
     // set missing poster if poster is missing 
     if (movie.Poster === `N/A`) {
-        imgRef.src = `./icons/missing-poster.svg`
+        imgRef.src = `./icons/missing-poster.svg`;
     } else {
         imgRef.src = movie.Poster;
     }
@@ -377,7 +377,7 @@ function renderMovieCard(movie) {
     const h3Ref = document.createElement(`h3`);
     h3Ref.classList.add(`movies__card-title`);
     h3Ref.textContent = movie.Title;
-    artRef.appendChild(h3Ref)
+    artRef.appendChild(h3Ref);
 }
 
 // functions for the recently viewed section
@@ -394,7 +394,7 @@ function renderRecentlyCard(movie) {
     let imgRef = document.createElement(`img`);
     // set missing poster if poster is missing 
     if (movie.Poster === `N/A`) {
-        imgRef.src = `./icons/missing-poster.svg`
+        imgRef.src = `./icons/missing-poster.svg`;
     } else {
         imgRef.src = movie.Poster;
     }
@@ -403,13 +403,13 @@ function renderRecentlyCard(movie) {
     artRef.appendChild(imgRef);
 
     // add eventlistener to moviecard
-    artRef.addEventListener(`click`, movieCardEvent)
+    artRef.addEventListener(`click`, movieCardEvent);
 }
 
 // funktion to add recenly viewed movie to footer 
 async function renderRecentlyViewed() {
     try {
-        const response = getLocalStorage(`recently`)
+        const response = getLocalStorage(`recently`);
 
         // check if any movies is clicked 
         if (response !== null) {
@@ -417,8 +417,8 @@ async function renderRecentlyViewed() {
             // loop and render all the viewed movie 
             for (let i = 0; i < response.length; i++) {
                 // get infotmation about movie from api 
-                const movie = await fetchMore(response[i])
-                renderRecentlyCard(movie)
+                const movie = await fetchMore(response[i]);
+                renderRecentlyCard(movie);
             }
         }
     } catch (error) {
@@ -429,75 +429,75 @@ async function renderRecentlyViewed() {
 // function to add movie to recently viewed when clicked 
 function addRecentlyViewed(id) {
     // get all movies from localstorage 
-    let response = getLocalStorage(`recently`)
+    let response = getLocalStorage(`recently`);
     // create an array 
-    let recentlyArray = []
+    let recentlyArray = [];
 
     // if respones is empty or not existing push id to array 
     if (response === null || response.length === 0) {
-        recentlyArray.unshift(id)
+        recentlyArray.unshift(id);
     }
     else {
 
         // remove id from respones if it's the same as clicked movie
-        response = response.filter(item => item !== id)
+        response = response.filter(item => item !== id);
 
         // add max six movies from localstorage to array 
         response.forEach(id => {
             if (recentlyArray.length < 6) {
-                recentlyArray.push(id)
+                recentlyArray.push(id);
             }
         });
         // add clicked movie to array 
-        recentlyArray.unshift(id)
+        recentlyArray.unshift(id);
     }
 
     // stringify array and add to local storage 
-    addLocalStorage(`recently`, JSON.stringify(recentlyArray))
+    addLocalStorage(`recently`, JSON.stringify(recentlyArray));
 }
 
 // functions for the favorit functionality
 function toggleFavorit(star) {
     // get favorit movies from localstorage 
-    const Response = getLocalStorage(`favorits`)
+    const Response = getLocalStorage(`favorits`);
     // create an array
-    let favoritsArray = []
+    let favoritsArray = [];
 
     // if respones is empty or not existing push id to array 
     if (Response === null || Response.length === 0) {
-        favoritsArray.push(star.dataset.id)
+        favoritsArray.push(star.dataset.id);
     } else {
         // add all movies from localstorage to array 
         Response.forEach(id => {
-            favoritsArray.push(id)
+            favoritsArray.push(id);
         });
         // add clicked movies to array 
-        favoritsArray.push(star.dataset.id)
+        favoritsArray.push(star.dataset.id);
     }
 
     // set star depending on data-favorit 
     if (star.dataset.favorit === `false`) {
         star.dataset.favorit = true;
-        star.src = `./icons/favorite-fill.svg`
+        star.src = `./icons/favorite-fill.svg`;
 
     } else if (star.dataset.favorit === `true`) {
-        favoritsArray = favoritsArray.filter(id => id !== star.dataset.id)
+        favoritsArray = favoritsArray.filter(id => id !== star.dataset.id);
         star.dataset.favorit = false;
-        star.src = `./icons/favorite-outline.svg`
+        star.src = `./icons/favorite-outline.svg`;
     }
 
     // stringify array and add to local storage 
-    addLocalStorage(`favorits`, JSON.stringify(favoritsArray))
+    addLocalStorage(`favorits`, JSON.stringify(favoritsArray));
 }
 
 function checkStars() {
     try {
         // get favorit movies from localstorage 
-        const favorits = getLocalStorage(`favorits`)
+        const favorits = getLocalStorage(`favorits`);
 
         if (favorits !== null) {
             // select all img elements 
-            const imgRef = document.querySelectorAll(`img`)
+            const imgRef = document.querySelectorAll(`img`);
 
             // loop through all img and check if alt text is favorit star 
             imgRef.forEach(node => {
@@ -523,16 +523,16 @@ function renderSearchOptions(movie) {
     artRef.classList.add(`header__search-options`);
 
     // create and set movie title 
-    let pRef = document.createElement(`p`)
-    pRef.textContent = movie.Title
-    artRef.appendChild(pRef)
+    let pRef = document.createElement(`p`);
+    pRef.textContent = movie.Title;
+    artRef.appendChild(pRef);
 
     // create and set release year 
-    pRef = document.createElement(`p`)
-    pRef.textContent = movie.Year
-    artRef.appendChild(pRef)
+    pRef = document.createElement(`p`);
+    pRef.textContent = movie.Year;
+    artRef.appendChild(pRef);
 
-    document.querySelector(`.header__options-container`).appendChild(artRef)
+    document.querySelector(`.header__options-container`).appendChild(artRef);
 }
 
 export {
