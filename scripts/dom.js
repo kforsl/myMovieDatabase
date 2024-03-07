@@ -63,7 +63,7 @@ async function renderStartPage() {
 
 async function renderFavoritPage() {
     const favorits = getLocalStorage(`favorits`);
-
+    console.log(favorits);
     // render the favorit page only when URL includes "favorit "
     if (window.location.href.includes(`favorit`)) {
 
@@ -71,11 +71,10 @@ async function renderFavoritPage() {
         if (favorits !== null) {
             document.querySelector(`.movies__card-container`).textContent = ``;
 
-            for (let i = 0; i < favorits.length; i++) {
-                const movie = await fetchMore(favorits[i]);
+            favorits.forEach(movie => {
                 renderMovieCard(movie);
                 checkStars();
-            }
+            });
 
             // add eventlistener to the moviecard
             document.querySelectorAll(`.movies__card`).forEach(card => {
@@ -457,7 +456,10 @@ function addRecentlyViewed(id) {
 }
 
 // functions for the favorit functionality
-function toggleFavorit(star) {
+function toggleFavorit(movie, star) {
+    const movieTitle = movie[2].textContent;
+    const moviePoster = movie[0].src;
+    const movieId = movie[1].dataset.id;
     // get favorit movies from localstorage 
     const Response = getLocalStorage(`favorits`);
     // create an array
@@ -465,14 +467,24 @@ function toggleFavorit(star) {
 
     // if respones is empty or not existing push id to array 
     if (Response === null || Response.length === 0) {
-        favoritsArray.push(star.dataset.id);
+        const movieInformation = {
+            Title: movieTitle,
+            Poster: moviePoster,
+            imdbID: movieId,
+        };
+        favoritsArray.unshift(movieInformation);
     } else {
         // add all movies from localstorage to array 
-        Response.forEach(id => {
-            favoritsArray.push(id);
+        Response.forEach(item => {
+            favoritsArray.push(item);
         });
         // add clicked movies to array 
-        favoritsArray.push(star.dataset.id);
+        const movieInformation = {
+            Title: movieTitle,
+            Poster: moviePoster,
+            imdbID: movieId,
+        };
+        favoritsArray.unshift(movieInformation);
     }
 
     // set star depending on data-favorit 
@@ -494,7 +506,6 @@ function checkStars() {
     try {
         // get favorit movies from localstorage 
         const favorits = getLocalStorage(`favorits`);
-
         if (favorits !== null) {
             // select all img elements 
             const imgRef = document.querySelectorAll(`img`);
@@ -503,10 +514,12 @@ function checkStars() {
             imgRef.forEach(node => {
                 if (node.alt === `Favorit Star`) {
                     // change to filled star if id is in favorit from localstorage 
-                    if (favorits.includes(node.getAttribute(`data-id`))) {
-                        node.src = `./icons/favorite-fill.svg`;
-                        node.dataset.favorit = true;
-                    }
+                    favorits.forEach(item => {
+                        if (item.imdbID.includes(node.getAttribute(`data-id`))) {
+                            node.src = `./icons/favorite-fill.svg`;
+                            node.dataset.favorit = true;
+                        }
+                    });
                 }
             });
         }
