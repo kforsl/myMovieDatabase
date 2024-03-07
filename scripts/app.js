@@ -64,7 +64,7 @@ async function movieCardEvent(event) {
     }
     // runs when user click the star
     else if (event.target.src.includes(`favorite`)) {
-        toggleFavorit(event.target);
+        toggleFavorit(this.children, event.target);
     }
 
     // run function to uppdate favorit page. does nothing if not on a url without favorit. 
